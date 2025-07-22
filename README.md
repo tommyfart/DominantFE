@@ -7,5 +7,5 @@ a pizza place and works.
 
 loadstring:
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/tommyfart/minifart/refs/heads/main/main.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/tommyfart/DominantFE/refs/heads/main/main.lua"))()
 ```
