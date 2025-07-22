@@ -1,4 +1,4 @@
-# minifart
+# dominantfe
 fe bypass gui made by minishakk and tommyfart
 
 before you say this is client-sided
