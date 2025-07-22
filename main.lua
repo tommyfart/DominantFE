@@ -2,6 +2,7 @@
 author: minishakk and tommyfart
 fe bypass omg
 ]]--
+
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local PlayerGui = game.CoreGui
@@ -15,8 +16,8 @@ gui.Enabled = true
 gui.Parent = PlayerGui
 
 local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0, 300, 0, 180)
-mainFrame.Position = UDim2.new(0.5, -150, 0.5, -90)
+mainFrame.Size = UDim2.new(0, 300, 0, 280)
+mainFrame.Position = UDim2.new(0.5, -150, 0.5, -140)
 mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 mainFrame.BorderSizePixel = 0
 mainFrame.Active = true
@@ -36,7 +37,6 @@ title.Text = "DominantFE"
 title.Font = Enum.Font.GothamBold
 title.TextSize = 24
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
-title.Visible = true
 title.Parent = mainFrame
 
 local subtitle = Instance.new("TextLabel")
@@ -47,47 +47,52 @@ subtitle.Text = ".gg/9NsJFQcWNt | by minishakk & tommyfart"
 subtitle.Font = Enum.Font.Gotham
 subtitle.TextSize = 12
 subtitle.TextColor3 = Color3.fromRGB(170, 170, 170)
-subtitle.Visible = true
 subtitle.Parent = mainFrame
 
-local button = Instance.new("TextButton")
-button.Size = UDim2.new(0, 240, 0, 40)
-button.Position = UDim2.new(0.5, -120, 0.5, -20)
-button.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-button.Text = "FE Guns"
-button.Font = Enum.Font.GothamBold
-button.TextSize = 18
-button.TextColor3 = Color3.fromRGB(255, 255, 255)
-button.Visible = true
-button.Parent = mainFrame
+local function createButton(text, yOffset, hint, scriptUrl)
+	local button = Instance.new("TextButton")
+	button.Size = UDim2.new(0, 240, 0, 35)
+	button.Position = UDim2.new(0.5, -120, 0, yOffset)
+	button.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+	button.Text = text
+	button.Font = Enum.Font.GothamBold
+	button.TextSize = 18
+	button.TextColor3 = Color3.fromRGB(255, 255, 255)
+	button.Parent = mainFrame
 
-local buttonCorner = Instance.new("UICorner")
-buttonCorner.CornerRadius = UDim.new(0, 6)
-buttonCorner.Parent = button
+	local buttonCorner = Instance.new("UICorner")
+	buttonCorner.CornerRadius = UDim.new(0, 6)
+	buttonCorner.Parent = button
 
-local tooltip = Instance.new("TextLabel")
-tooltip.Size = UDim2.new(0, 200, 0, 20)
-tooltip.Position = UDim2.new(0.5, -100, 1, 5)
-tooltip.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-tooltip.TextColor3 = Color3.fromRGB(255, 255, 255)
-tooltip.Text = "only works on npcs | equip gun 2 times"
-tooltip.Font = Enum.Font.Gotham
-tooltip.TextSize = 12
-tooltip.Visible = false
-tooltip.Parent = mainFrame
-
-local tooltipCorner = Instance.new("UICorner")
-tooltipCorner.CornerRadius = UDim.new(0, 4)
-tooltipCorner.Parent = tooltip
-
-button.MouseEnter:Connect(function()
-	tooltip.Visible = true
-end)
-
-button.MouseLeave:Connect(function()
+	local tooltip = Instance.new("TextLabel")
+	tooltip.Size = UDim2.new(0, 200, 0, 20)
+	tooltip.Position = UDim2.new(0.5, -100, 0, yOffset + 40)
+	tooltip.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	tooltip.TextColor3 = Color3.fromRGB(255, 255, 255)
+	tooltip.Text = hint
+	tooltip.Font = Enum.Font.Gotham
+	tooltip.TextSize = 12
 	tooltip.Visible = false
-end)
+	tooltip.Parent = mainFrame
 
-button.MouseButton1Click:Connect(function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/tommyfart/minifart/refs/heads/main/scripts/feguns.lua"))()
-end)
+	local tooltipCorner = Instance.new("UICorner")
+	tooltipCorner.CornerRadius = UDim.new(0, 4)
+	tooltipCorner.Parent = tooltip
+
+	button.MouseEnter:Connect(function()
+		tooltip.Visible = true
+	end)
+	button.MouseLeave:Connect(function()
+		tooltip.Visible = false
+	end)
+
+	button.MouseButton1Click:Connect(function()
+		loadstring(game:HttpGet(scriptUrl, true))()
+	end)
+end
+
+-- type fart
+createButton("FE Guns", 70, "only works on npcs | equip gun 2 times", "https://raw.githubusercontent.com/tommyfart/minifart/refs/heads/main/scripts/feguns.lua")
+createButton("FE Fling", 115, "fling players or npcs | R15 recommended", "https://raw.githubusercontent.com/tommyfart/DominantFE/refs/heads/main/scripts/fefling.lua")
+createButton("FE Punch", 160, "Punch NPCs ONLY!", "https://raw.githubusercontent.com/shakk-code/fe-punch-script/refs/heads/main/script.lua")
+createButton("FE Choke", 205, "Choke NPCs ONLY!", "https://raw.githubusercontent.com/shakk-code/fe-choke-script/refs/heads/main/script.lua")
